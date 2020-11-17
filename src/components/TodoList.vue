@@ -1,7 +1,7 @@
 <template>
   <section>
     <ul>
-      <li v-for="(todoItem, index) in todoItems" :key="index" class="Shadow">
+      <li v-for="(todoItem, index) in propsdata" :key="index" class="Shadow">
         <i class="checkBtn fas fa-check" aria-hidden="true"></i>
         {{ todoItem }}
         <span
@@ -18,24 +18,13 @@
 
 <script>
 export default {
-  data() {
-    return {
-      todoItems: [],
-    };
-  },
-  created() {
-    if (localStorage.length > 0) {
-      for (var i = 0; i < localStorage.length; i++) {
-        this.todoItems.push(localStorage.key(i));
-      }
-    }
-  },
+  props: ['propsdata'],
   methods: {
-      removeTodo(todoItem, index) {
-          localStorage.removeItem(todoItem);
-          this.todoItems.splice(index, 1);
-      }
-  }
+    removeTodo(todoItem, index) {
+      localStorage.removeItem(todoItem);
+      this.todoItems.splice(index, 1);
+    },
+  },
 };
 </script>
 
@@ -55,15 +44,15 @@ li {
   margin: 0.5rem 0;
   padding: 0 0.9rem;
   background: white;
-  border-radius: 5px;;
+  border-radius: 5px;
 }
 .checkBtn {
-    line-height: 45px;
-    color: #62acde;
-    margin-right: 5px;
+  line-height: 45px;
+  color: #62acde;
+  margin-right: 5px;
 }
 .removeBtn {
-    margin-left: auto;
-    color: #de4343;
+  margin-left: auto;
+  color: #de4343;
 }
 </style>
